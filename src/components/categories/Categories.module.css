@@ -1,0 +1,23 @@
+.categoriesSection {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.categoryItem {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.categories {
+  display: flex;
+  gap: 16px; /* Adds spacing between categories */
+}
+
+.scrollableContainer {
+  overflow-x: scroll;
+  display: flex;
+  width: 100%;
+}
