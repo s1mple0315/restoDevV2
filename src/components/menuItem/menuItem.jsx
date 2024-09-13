@@ -4,11 +4,11 @@ import styles from "./menuItem.module.css";
 const MenuItem = () => {
   return (
     <div className={`${styles.menuItem} d-flex flex-column position-relative`}>
-      <img src="/public/assets/menuItem/Placeholder.png" alt="" />
+      <img src="/assets/menuItem/Placeholder.png" alt="" />
       <h3>Название блюда</h3>
       <p>Описание блюда</p>
       <h3>1 000 руб.</h3>
-      <Link to={"/item/:id"}>
+      <Link to={"/item"}>
         <button className="position-absolute">
           <svg
             width="14"
