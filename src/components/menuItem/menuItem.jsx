@@ -1,13 +1,23 @@
+import { useContext } from "react";
+import { CartContext } from "../../context/cartContext/CartContext";
 import { Link } from "react-router-dom";
 import styles from "./menuItem.module.css";
 
-const MenuItem = () => {
+const MenuItem = ({ name, description, cost, photo, id }) => {
+  const { addToCart } = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    const item = { id, name, cost }; // Prepare the item details to be added to the cart
+    addToCart(item); // Add item to the cart
+  };
+
   return (
     <div className={`${styles.menuItem} d-flex flex-column position-relative`}>
-      <img src="/assets/menuItem/Placeholder.png" alt="" />
-      <h3>Название блюда</h3>
-      <p>Описание блюда</p>
-      <h3>1 000 руб.</h3>
+      <img src='assets/menuItem/Placeholder.png' alt={name} />
+      <h3>{name}</h3>
+      <p>{description}</p>
+      <h3>{cost} руб.</h3>
+      <button onClick={handleAddToCart}>add to cart</button>
       <Link to={"/item"}>
         <button className="position-absolute">
           <svg

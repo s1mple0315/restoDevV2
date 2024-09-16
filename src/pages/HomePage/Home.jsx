@@ -1,4 +1,3 @@
-// import Cart from "../OrderPage/Cart";
 import { Link } from "react-router-dom";
 import Categories from "../../components/categories/Categories";
 import Menu from "../../components/menus/Menu";
