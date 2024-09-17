@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MenuItem from "../menuItem/menuItem";
 import styles from "./Menu.module.css";
+import LoadingScreen from "../loadingScreen/LoadingScreen";
 
 const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -14,7 +15,6 @@ const Menu = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            // "Authorization": "Bearer yourToken"
           },
         });
 
@@ -25,6 +25,8 @@ const Menu = () => {
         const data = await response.json();
         if (data.list) {
           setMenuItems(data.list);
+        } else {
+          setMenuItems([]); // Set to empty if no items found
         }
       } catch (err) {
         setError(err.message);
@@ -37,7 +39,7 @@ const Menu = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingScreen />;
   }
 
   if (error) {

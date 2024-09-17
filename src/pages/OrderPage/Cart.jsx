@@ -1,18 +1,15 @@
-import React, { useContext } from 'react';
-import { CartContext } from '../../context/cartContext/CartContext';
-import OrderedItem from '../../components/orderedItem/OrderedItem';
-import styles from './Cart.module.css';
+import { useContext } from "react";
+import { CartContext } from "../../context/cartContext/CartContext";
+import OrderedItem from "../../components/orderedItem/OrderedItem";
+import styles from "./Cart.module.css";
 
 const Cart = () => {
-  const { cartItems } = useContext(CartContext); // Access cart items from context
-
-  // Calculate total cost of items in the cart
-  const totalCost = cartItems.reduce((acc, item) => acc + item.cost * item.quantity, 0);
-
-  // Optionally, calculate a service fee (10% of total cost)
+  const { cartItems } = useContext(CartContext);
+  const totalCost = cartItems.reduce(
+    (acc, item) => acc + item.cost * item.quantity,
+    0
+  );
   const serviceFee = totalCost * 0.1;
-
-  // Calculate the grand total (total cost + service fee)
   const grandTotal = totalCost + serviceFee;
 
   return (
@@ -21,10 +18,10 @@ const Cart = () => {
       <div className={`${styles.orderDetailsContainer} d-flex flex-column gap-3`}>
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
-            <OrderedItem key={item.id} {...item} /> // Pass item details to OrderedItem
+            <OrderedItem key={item.id} {...item} /> // Add a unique key here using item.id
           ))
         ) : (
-          <p>Корзина пуста</p> // Display a message if cart is empty
+          <p>Корзина пуста</p>
         )}
       </div>
       <div className={`${styles.orderedTotal}`}>

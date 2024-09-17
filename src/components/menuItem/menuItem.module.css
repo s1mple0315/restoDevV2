@@ -3,6 +3,10 @@
   border-radius: 10px;
 }
 
+.descriptionContainer{
+  padding: 5px;
+}
+
 .menuItem img {
   border-radius: 10px;
   background-color: transparent;

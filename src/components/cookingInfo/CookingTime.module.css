@@ -1,0 +1,9 @@
+.cookingTimeContainer {
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  width: 75px;
+  font-size: 10px;
+  font-weight: 600;
+  align-items: center;
+  padding: 3px;
+}

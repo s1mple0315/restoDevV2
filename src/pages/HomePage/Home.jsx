@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Categories from "../../components/categories/Categories";
 import Menu from "../../components/menus/Menu";
 import styles from "./Home.module.css";
+import CallWaiter from "../../components/callWaiter/CallWaiter";
 const Home = () => {
   return (
     <div className={`${styles.homeContainer} container position-relative`}>
@@ -31,6 +32,7 @@ const Home = () => {
       {/* <div className={`${styles.homeBanner}`}></div> */}
       <Categories />
       <Menu />
+      <CallWaiter />
     </div>
   );
 };

@@ -1,23 +1,81 @@
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { CartContext } from "../../context/cartContext/CartContext";
 import Nutrition from "../../components/nutritiionInfo/Nutrition";
-import styles from "./ItemDetail.module.css";
 import CookingTime from "../../components/cookingInfo/CookingTime";
+import styles from "./ItemDetail.module.css";
+import LoadingScreen from "../../components/loadingScreen/LoadingScreen";
 
 const ItemDetails = () => {
+  const { id } = useParams();
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { addToCart } = useContext(CartContext);
+
+  useEffect(() => {
+    const fetchItemDetails = async () => {
+      try {
+        const response = await fetch(`/api/user/dish/definite/${id}/`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setItem(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchItemDetails();
+  }, [id]);
+
+  const handleAddToCart = () => {
+    if (item) {
+      const cartItem = {
+        id: item.id,
+        name: item.name,
+        photo: item.photo,
+        cost: item.cost,
+      };
+      addToCart(cartItem);
+    }
+  };
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  if (!item) {
+    return <p>No details found for this item</p>;
+  }
+
   return (
     <div className={`${styles.itemDetails} container`}>
       <div className={`${styles.itemDetailsImageContainer} position-relative`}>
         <img
-          src="/assets/menuItem/Placeholder.png"
-          alt="Menu Item Photo"
+          src={item.photo || "/assets/menuItem/Placeholder.png"}
+          alt={item.name}
           className={styles.itemDetailsImage}
         />
         <div className="d-flex justify-content-between">
-          <Link
-            className={`${styles.itemDetailsActionBtns} position-absolute`}
-            to={"/"}
-          >
-            <button>
+          <Link to="/">
+            <button
+              className={`${styles.itemDetailsActionBtn1} d-flex flex-column position-absolute`}
+            >
               <svg
                 width="13"
                 height="22"
@@ -26,7 +84,7 @@ const ItemDetails = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M12 21L1.81393 11.7399C1.3775 11.3432 1.3775 10.6568 1.81393 10.2601L12 0.999999"
+                  d="M12 21L1.81393 11.7399C1.3775 11.3432 1.3775 10.6568 1.81393 10.2601L12 1"
                   stroke="#B6B6B6"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -34,11 +92,10 @@ const ItemDetails = () => {
               </svg>
             </button>
           </Link>
-          <Link
-            className={`${styles.itemDetailsActionBtns} position-absolute`}
-            to={"/cart"}
-          >
-            <button>
+          <Link to="/cart">
+            <button
+              className={`${styles.itemDetailsActionBtn2} d-flex position-absolute`}
+            >
               <svg
                 width="18"
                 height="24"
@@ -62,14 +119,21 @@ const ItemDetails = () => {
           className={`${styles.itemDetailsText} d-flex justify-content-between`}
         >
           <div>
-            <h2>Название блюда</h2>
-            <p>Описание блюда</p>
+            <h2>{item.name}</h2>
+            <p>{item.description}</p>
           </div>
-          <p>1000 ₽</p>
+          <p>{item.cost} ₽</p>
         </div>
-        <CookingTime time={'20 минут'}/>
-        <Nutrition kcal={"Ккал"} proteins={"Белки"} fats={"Жиры"} carbs={"Углеводы"}/>
-        <button className={styles.addToCartButton}>Заказать</button>
+        <CookingTime time={item.cookingTime || "20 минут"} />
+        <Nutrition
+          kcal={item.nutrition?.kcal || "Ккал"}
+          proteins={item.nutrition?.proteins || "Белки"}
+          fats={item.nutrition?.fats || "Жиры"}
+          carbs={item.nutrition?.carbs || "Углеводы"}
+        />
+        <button className={styles.addToCartButton} onClick={handleAddToCart}>
+          Заказать
+        </button>
       </div>
     </div>
   );
