@@ -1,5 +1,6 @@
 .menuContainer {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns */
-  gap: 20px; /* Space between items */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px; 
+  margin-bottom: 100px;
 }

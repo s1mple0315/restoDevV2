@@ -13,7 +13,8 @@
 
 .categories {
   display: flex;
-  gap: 16px; /* Adds spacing between categories */
+  gap: 16px;
+  padding: 10px 5px;
 }
 
 .scrollableContainer {
