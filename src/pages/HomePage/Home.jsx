@@ -3,6 +3,7 @@ import Categories from "../../components/categories/Categories";
 import Menu from "../../components/menus/Menu";
 import styles from "./Home.module.css";
 import CallWaiter from "../../components/callWaiter/CallWaiter";
+import Switch from "../../components/themeSwitcher/Switch";
 const Home = () => {
   return (
     <div className={`${styles.homeContainer} container position-relative`}>
@@ -28,6 +29,7 @@ const Home = () => {
             </svg>
           </button>
         </Link>
+        <Switch />
       </div>
       {/* <div className={`${styles.homeBanner}`}></div> */}
       <Categories />

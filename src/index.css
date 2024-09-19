@@ -1,10 +1,25 @@
-body{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+:root {
+  --background: #fff;
+  --text-primary: #38374a;
+  --text-secondary: #b6b6b6;
 }
 
-p{
-    margin: 0;
-    padding: 0;
+[data-theme="dark"] {
+  --background: #1e1e1e;
+  --text-primary: #eaeaea;
+  --text-secondary: #8a8a8a;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: var(--background);
+  color: var(--text-primary);
+  transition: all .5s ease-in-out;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }

@@ -18,7 +18,7 @@ const Cart = () => {
       <div className={`${styles.orderDetailsContainer} d-flex flex-column gap-3`}>
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
-            <OrderedItem key={item.id} {...item} /> // Add a unique key here using item.id
+            <OrderedItem key={item.id} {...item} />
           ))
         ) : (
           <p>Корзина пуста</p>
