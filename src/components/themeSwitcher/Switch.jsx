@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "./Switch.module.css";
 
 const Switch = () => {
   const [theme, setTheme] = useState("light");
@@ -13,11 +14,14 @@ const Switch = () => {
 
   return (
     <div>
-      <input
-        type="checkbox"
-        onChange={handleChange}
-        checked={theme === "dark"}
-      />
+      <label className={`${styles.switch}`}>
+        <input
+          type="checkbox"
+          onChange={handleChange}
+          checked={theme === "dark"}
+        />
+        <span className={`${styles.slider} ${styles.round}`}></span>
+      </label>
     </div>
   );
 };

@@ -7,12 +7,12 @@ import Switch from "../../components/themeSwitcher/Switch";
 const Home = () => {
   return (
     <div className={`${styles.homeContainer} container position-relative`}>
-      <div className={`${styles.topContainer} row justify-content-between`}>
-        <div className={`${styles.inputWrapper} col-4`}>
+      <div className={`${styles.topContainer} d-flex justify-content-between`}>
+        <div className={`${styles.inputWrapper} `}>
           <input type="text" />
         </div>
         <Link to={"/cart"}>
-          <button className="col-8">
+          <button className="">
             <svg
               width="18"
               height="24"
@@ -32,7 +32,7 @@ const Home = () => {
         <Switch />
       </div>
       {/* <div className={`${styles.homeBanner}`}></div> */}
-      <Categories />
+      <Categories idRest={5} />
       <Menu />
       <CallWaiter />
     </div>

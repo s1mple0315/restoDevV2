@@ -2,12 +2,16 @@
   --background: #fff;
   --text-primary: #38374a;
   --text-secondary: #b6b6b6;
+  --box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
+
 }
 
 [data-theme="dark"] {
   --background: #1e1e1e;
   --text-primary: #eaeaea;
   --text-secondary: #8a8a8a;
+  --box-shadow: 0px 3px 10px 0px rgba(255, 255, 255, 0.1);
+
 }
 
 body {
