@@ -29,6 +29,7 @@
   width: 100%;
   border: none;
   height: max-content;
+  background-color: transparent;
 }
 
 .homeBanner {

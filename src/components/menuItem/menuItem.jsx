@@ -4,11 +4,11 @@ import styles from "./menuItem.module.css";
 const MenuItem = ({ name, description, cost, photo, id }) => {
   return (
     <div className={`${styles.menuItem} d-flex flex-column position-relative`}>
-      <img src={"assets/menuItem/Placeholder.png"} alt={name} />
+      <img src={photo} alt={name} />
       <div className={`${styles.descriptionContainer}`}>
         <h3>{name}</h3>
         <p>{description}</p>
-        <h3>{cost} руб.</h3>
+        <h2>{cost} руб.</h2>
       </div>
       <Link to={`/item/${id}`}>
         <button className="position-absolute">

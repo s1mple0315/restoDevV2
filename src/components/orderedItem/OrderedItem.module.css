@@ -8,6 +8,7 @@
 }
 
 .orderedItemImage img {
+  border-radius: 20px;
   width: 100%;
   object-fit: fill;
 }

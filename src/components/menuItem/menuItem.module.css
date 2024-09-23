@@ -7,7 +7,25 @@
   padding: 5px;
 }
 
+.descriptionContainer h3{
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.descriptionContainer h2{
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.descriptionContainer p{
+  font-size: 9px;
+  color: var(--text-secondary);
+}
+
 .menuItem img {
+  width: 100%;
   border-radius: 10px;
   background-color: transparent;
 }
@@ -23,6 +41,5 @@
   background-color: #f85625;
   bottom: 5px;
   right: 5px;
-  /* CSS for shadow effect */
   box-shadow: var(--box-shadow);
 }

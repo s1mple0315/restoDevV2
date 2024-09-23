@@ -52,7 +52,7 @@ const Categories = ({ idRest }) => {
       <div className={styles.scrollableContainer}>
         <div className={`${styles.categories} d-flex`}>
           {categories.map((category) => (
-            <div key={category.id}>
+            <div key={category.id} className={`${styles.categoriesContainer}`}>
               <div className={`${styles.categoryItem}`} ></div>
               <p>{category.name}</p>
             </div>
