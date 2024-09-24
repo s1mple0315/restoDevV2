@@ -12,6 +12,7 @@ const ItemDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useContext(CartContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchItemDetails = async () => {
@@ -41,13 +42,19 @@ const ItemDetails = () => {
 
   const handleAddToCart = () => {
     if (item) {
+      setIsLoading(true);
+
       const cartItem = {
         id: item.id,
         name: item.name,
         photo: item.photo,
         cost: item.cost,
       };
-      addToCart(cartItem);
+
+      setTimeout(() => {
+        addToCart(cartItem);
+        setIsLoading(false)
+      }, 1000);
     }
   };
 
@@ -118,7 +125,7 @@ const ItemDetails = () => {
         <div
           className={`${styles.itemDetailsText} d-flex justify-content-between`}
         >
-          <div>
+          <div className={`${styles.itemDetailsTextDesc}`}>
             <h2>{item.name}</h2>
             <p>{item.description}</p>
           </div>
@@ -131,8 +138,12 @@ const ItemDetails = () => {
           fats={item.nutrition?.fats || "Жиры"}
           carbs={item.nutrition?.carbs || "Углеводы"}
         />
-        <button className={styles.addToCartButton} onClick={handleAddToCart}>
-          Заказать
+       <button className={styles.addToCartButton} onClick={handleAddToCart} disabled={isLoading}>
+          {isLoading ? (
+            <div className={styles.spinner}></div> // Spinner will show when loading
+          ) : (
+            "Заказать"
+          )}
         </button>
       </div>
     </div>
