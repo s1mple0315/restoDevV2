@@ -6,14 +6,14 @@ const OrderedItem = () => {
   const { cartItems, addToCart, decreaseQuantity } = useContext(CartContext);
 
   if (!cartItems || cartItems.length === 0) {
-    return <p>Your cart is empty</p>;
+    return <p>Ваша корзина пуста</p>;
   }
 
   return (
-    <div>
-      {cartItems.map((item) => (
+    <>
+      {cartItems.map((item, index) => (
         <div
-          key={item.id}
+          key={`${item.id}-${index}`}
           className={`${styles.orderedItem} position-relative d-flex align-items-center`}
         >
           <div className={styles.orderedItemImage}>
@@ -29,7 +29,6 @@ const OrderedItem = () => {
           <div
             className={`${styles.orderedItemControls} position-absolute d-flex justify-content-center`}
           >
-            {/* Decrease quantity button */}
             <button onClick={() => decreaseQuantity(item.id)}>
               <svg width="10" height="2" viewBox="0 0 10 2" fill="none">
                 <path
@@ -40,10 +39,8 @@ const OrderedItem = () => {
               </svg>
             </button>
 
-            {/* Display the item quantity */}
             <p>{item.quantity}</p>
 
-            {/* Increase quantity button */}
             <button onClick={() => addToCart({ ...item, quantity: 1 })}>
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                 <path d="M5 1L5 9" stroke="#38374A" strokeLinecap="round" />
@@ -53,7 +50,7 @@ const OrderedItem = () => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

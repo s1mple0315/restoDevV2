@@ -48,11 +48,7 @@ const Cart = () => {
       <div
         className={`${styles.orderDetailsContainer} d-flex flex-column gap-3`}
       >
-        {cartItems.length > 0 ? (
-          cartItems.map((item) => <OrderedItem key={item.id} {...item} />)
-        ) : (
-          <p>Корзина пуста</p>
-        )}
+        <OrderedItem />
       </div>
       <div className={`${styles.orderedTotal}`}>
         <div className={`d-flex justify-content-between`}>
