@@ -1,0 +1,31 @@
+.loginPageContainer {
+  height: 100vh;
+}
+
+.loginLeftContainer {
+  background-color: #d9d9d9;
+  padding: 30px 35px;
+}
+
+.loginRightContainer {
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.loginForm > button{
+    border: none;
+    background-color: #F85625;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.loginForm input[type="text"]{
+    border: 1px #3A57E8 solid;
+}

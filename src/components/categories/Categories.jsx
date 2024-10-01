@@ -1,36 +1,15 @@
-import { useEffect, useState } from "react";
 import styles from "./Categories.module.css";
+import useFetchCategories from "../../hooks/Client/useFetchCategories";
 
 const Categories = ({ idRest }) => {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { categories, loading, error } = useFetchCategories(idRest);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(`/api/user/menu/list/${idRest}/`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setCategories(data.list);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, [idRest]);
+  const handleCategoryClick = (categoryId) => {
+    const menuSection = document.getElementById(`category-${categoryId}`);
+    if (menuSection) {
+      menuSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -52,8 +31,13 @@ const Categories = ({ idRest }) => {
       <div className={styles.scrollableContainer}>
         <div className={`${styles.categories} d-flex`}>
           {categories.map((category) => (
-            <div key={category.id} className={`${styles.categoriesContainer}`}>
-              <div className={`${styles.categoryItem}`} ></div>
+            <div
+              key={category.id}
+              className={`${styles.categoriesContainer}`}
+              onClick={() => handleCategoryClick(category.id)} 
+              style={{ cursor: "pointer" }}
+            >
+              <div className={`${styles.categoryItem}`}></div>
               <p>{category.name}</p>
             </div>
           ))}
