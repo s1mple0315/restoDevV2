@@ -26,3 +26,34 @@
 .stopList {
   padding: 15px 0;
 }
+
+.addCategoriesContainer{
+  padding: 25px 5px;
+}
+
+.addCategoriesContainer > div > p::after{
+  content: " ";
+  height: 3px;
+  width: 3px;
+  color: #999C9E;
+  margin: 0 5px;
+}
+
+.addCategoriesContainer button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px;
+  border: none;
+  border-radius: 12px;
+}
+
+/* .categoriesSection > div{
+  padding: 25px 0;
+  background-color: #F4F6F7;
+  border-radius: 12px;
+}
+
+.categoriesSection > div > p{
+  margin-left: 15px;
+} */

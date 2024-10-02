@@ -1,0 +1,9 @@
+.dashboardCategory{
+    padding: 25px 0;
+    background-color: #F4F6F7;
+    border-radius: 12px;
+}
+
+.dashboardCategory p{
+    margin-left: 15px;
+}

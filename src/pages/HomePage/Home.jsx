@@ -6,6 +6,10 @@ import CallWaiter from "../../components/callWaiter/CallWaiter";
 import Switch from "../../components/themeSwitcher/Switch";
 
 const Home = () => {
+  // const {categories} = useFetchAdminCategories();
+  // console.log(categories);
+  
+
   return (
     <div className={`${styles.homeContainer} container position-relative`}>
       <Link to={"/cart"}>

@@ -1,4 +1,3 @@
-// context/RoleContext.js
 import { createContext, useState, useEffect } from "react";
 
 export const RoleContext = createContext();

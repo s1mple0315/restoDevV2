@@ -3,6 +3,7 @@ import useFetchCategories from "../../hooks/Client/useFetchCategories";
 
 const Categories = ({ idRest }) => {
   const { categories, loading, error } = useFetchCategories(idRest);
+  
 
   const handleCategoryClick = (categoryId) => {
     const menuSection = document.getElementById(`category-${categoryId}`);
