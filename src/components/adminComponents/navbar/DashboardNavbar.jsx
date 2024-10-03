@@ -1,48 +1,39 @@
-import useFetchAdminCategories from "../../../hooks/admin/useFetchAdminCategories";
 import styles from "./DashboardNavbar.module.css";
 import DashboardCategories from "../dashboardCategories/DashboardCategories";
 import Modal from "../modal/Modal";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AdminDashboardContext } from "../../../context/adminDashboardContext/adminDashboardContext";
 
 const DashboardNavbar = () => {
-  const { categories, loading, error } = useFetchAdminCategories();
-  const [newCategory, setNewCategory] = useState("");
-  const [message, setMessage] = useState(null);
+  const {
+    categories,
+    selectedCategory,
+    createCategory,
+    setSelectedCategory,
+    loading,
+    error,
+  } = useContext(AdminDashboardContext);
+  const [newCategory, setNewCategory] = useState({ name: "" });
+  // const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const handleCategoryChange = (e) => {
-    setNewCategory(e.target.value);
-  };
+  // const handleCategoryClick = (category) => {
+  //   setSelectedCategory(category);
+  //   console.log("Selected category:", category); // Check if it's logged correctly
+  // };
 
-  const handleAddCategory = async () => {
-    if (!newCategory) {
+  const handleAddCategory = (e) => {
+    e.preventDefault();
+
+    if (!newCategory.name) {
       alert("Please enter a category name");
       return;
     }
 
-    try {
-      const response = await fetch("/api/admin/menu/create/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer YOUR_TOKEN`, // Use your token here
-        },
-        body: JSON.stringify({
-          name: newCategory, // Send the category name in the request body
-        }),
-      });
-
-      const data = await response.json();
-      if (data.message === "successfully") {
-        setMessage("Category created successfully");
-        setNewCategory(""); 
-      } else {
-        setMessage(`Error: ${data.description}`);
-      }
-    } catch (error) {
-      setMessage("Error occurred while creating the category");
-    }
+    createCategory(newCategory);
+    setNewCategory({ name: "" });
+    setShowModal(false);
   };
 
   if (loading) {
@@ -101,7 +92,7 @@ const DashboardNavbar = () => {
           </button>
         </div>
         {categories.map((category) => (
-          <DashboardCategories name={category.name} key={category.id} />
+          <DashboardCategories name={category.name} key={category.id} id={category.id} />
         ))}
       </div>
 
@@ -112,8 +103,13 @@ const DashboardNavbar = () => {
       >
         <input
           type="text"
-          value={newCategory}
-          onChange={(e) => setNewCategory(e.target.value)}
+          value={newCategory.name}
+          onChange={(e) =>
+            setNewCategory({
+              ...newCategory,
+              name: `${e.target.value}`,
+            })
+          }
           placeholder="Category Name"
         />
         <button onClick={handleAddCategory}>Add Category</button>
