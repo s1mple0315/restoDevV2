@@ -4,7 +4,7 @@ export const AdminDashboardContext = createContext();
 
 export const AdminDashboardProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
-  const [menuItems, setMenuItems] = useState([]);
+//   const [menuItems, setMenuItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,25 +13,27 @@ export const AdminDashboardProvider = ({ children }) => {
     "5RhC6qq3oHgGWEekdjbxFQJnRRwCbmAUME2UWp5xnSNm+T+RCe9Pst3E0ILIP1D8";
 
   // Function to fetch all menuItems
-  const fetchAdminDashboardMenuItems = async (selectedCategory) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`/api/admin/dish/list_get/${selectedCategory}/`, {
-        headers: {
-          Authorization: `Bearer ${AUTH_TOKEN}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch");
-      }
-      const data = await response.json();
-      setMenuItems(data);
-      setLoading(false);
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
-    }
-  };
+//   const fetchAdminDashboardMenuItems = async (selectedCategory) => {
+//     setLoading(true);
+//     try {
+//       const response = await fetch(`/api/admin/dish/list_get/${selectedCategory}/`, {
+//         headers: {
+//           Authorization: `Bearer ${AUTH_TOKEN}`,
+//         },
+//       });
+//       if (!response.ok) {
+//         throw new Error("Failed to fetch");
+//       }
+//       const data = await response.json();
+//       setMenuItems(data);
+//       setLoading(false);
+//       console.log(data )
+//       console.log(menuItems )
+//     } catch (err) {
+//       setError(err.message);
+//       setLoading(false);
+//     }
+//   };
 
   // Function to fetch categories
   const fetchCategories = async () => {
@@ -105,13 +107,13 @@ export const AdminDashboardProvider = ({ children }) => {
     <AdminDashboardContext.Provider
       value={{
         categories,
-        menuItems,
+        // menuItems,
         selectedCategory,
         loading,
         error,
         createCategory,
         setSelectedCategory,
-        fetchAdminDashboardMenuItems,
+        // fetchAdminDashboardMenuItems,
       }}
     >
       {children}

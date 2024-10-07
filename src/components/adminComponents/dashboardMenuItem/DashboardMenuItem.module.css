@@ -1,0 +1,21 @@
+.leftContainer input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #F85625DE;
+}
+
+.leftContainer input[type="checkbox"]:checked {
+  background-color: #f85625de;
+  color: #fff;
+}
+
+.leftContainer img {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+}
+
+.rightContainer button {
+  border: none;
+  background-color: transparent;
+}

@@ -1,21 +1,55 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import DashboardMenuItem from "../dashboardMenuItem/DashboardMenuItem";
 import styles from "./DashboardMenu.module.css";
 import { AdminDashboardContext } from "../../../context/adminDashboardContext/adminDashboardContext";
 
 const DashboardMenu = () => {
   const { selectedCategory, categories } = useContext(AdminDashboardContext);
+  const [menuItems, setMenuItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const category = categories.find((cat) => cat.id === selectedCategory);
 
+  useEffect(() => {
+    const fetchMenuItems = async () => {
+        if (!selectedCategory) return; // Exit if no category is selected
+      
+        setLoading(true);
+        setError(null);
+      
+        try {
+            const response = await fetch(`api/admin/dish/list_get/${selectedCategory}/`, {
+              method: 'GET',
+              headers: {
+                'Authorization': 'Bearer 5RhC6qq3oHgGWEekdjbxFQJnRRwCbmAUME2UWp5xnSNm+T+RCe9Pst3E0ILIP1D8',
+                'Content-Type': 'application/json'
+              }
+            });
+        
+            if (!response.ok) {
+              throw new Error('Failed to fetch menu items');
+            }
+        
+            const data = await response.json(); // Ensure data is parsed as JSON
+            console.log('Fetched data:', data); // Log fetched data
+            setMenuItems(data.list); // Assuming data is an array
+          } catch (err) {
+            setError(err.message);
+          } finally {
+            setLoading(false);
+          }
+      };
+      
+    fetchMenuItems();
+  }, [selectedCategory]);
+
   return (
     <section className={`${styles.dashboardMenuContainer} d-flex flex-column`}>
-      <div
-        className={`${styles.categoryContainer} d-flex justify-content-between`}
-      >
+      <div className={`${styles.categoryContainer} d-flex justify-content-between mb-3`}>
         <div className="d-flex flex-column">
           <h3>{category ? category.name : "Select a category"}</h3>
-          <p>6 позиций</p>
+          <p>{menuItems.length} позиций</p>
         </div>
         <button>
           <svg
@@ -33,7 +67,20 @@ const DashboardMenu = () => {
         </button>
       </div>
 
-      <DashboardMenuItem />
+      {loading && <p>Loading menu items...</p>}
+      {error && <p>Error: {error}</p>}
+
+      <div className="d-flex flex-column gap-3">
+        {menuItems.map((item) => (
+          <DashboardMenuItem 
+            key={item.id} // Assuming each item has a unique 'id'
+            itemName={item.name}
+            itemImg={item.photo} // Assuming 'image' is a property in the item object
+            itemKCAL={item.kcal} // Assuming 'kcal' is a property in the item object
+            itemPrice={item.cost} // Assuming 'price' is a property in the item object
+          />
+        ))}
+      </div>
     </section>
   );
 };
